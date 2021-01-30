@@ -34,7 +34,7 @@
   },
   "scripts": {
     "start": "ts-node src/app.ts",
-    "dev": "ts-node src/app.ts",
+    "dev": "nodemon",
     "test": "test",
     "lint": "eslint .",
     "lintfix": "prettier --write '**/*.{js,json}' && eslint --fix ."
