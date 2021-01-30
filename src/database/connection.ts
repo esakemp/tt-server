@@ -1,9 +1,9 @@
-const Sequelize = require('sequelize')
+import * as sequelize from 'sequelize'
 
 const DB_URL = process.env.DB_URL
 const DB_SCHEMA = process.env.DB_SCHEMA || 'public'
 
-const sequelize = new Sequelize(DB_URL, {
+const dbConfig = new sequelize.Sequelize(DB_URL, {
   schema: DB_SCHEMA,
   searchPath: DB_SCHEMA,
   logging: false,
@@ -13,7 +13,7 @@ const sequelize = new Sequelize(DB_URL, {
   },
 })
 
-const initializeDatabaseConnection = async () => {
+export const initializeDatabaseConnection = async () => {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
   const waitSeconds = 60
   for (let i = 1; i <= waitSeconds; i++) {

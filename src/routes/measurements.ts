@@ -1,10 +1,12 @@
-const router = require('express').Router()
-const {
+import { Router } from 'express'
+import {
   getMeasurements,
   createMeasurement,
   deleteMeasurement,
   updateMeasurement,
-} = require('../services/measurementService')
+} from '../services/measurementService'
+
+const router = Router()
 
 router.get('/api/measurements', async (req, res) => {
   try {
@@ -49,4 +51,4 @@ router.delete('/api/measurements/:id', async (req, res) => {
   }
 })
 
-module.exports = router
+export default router
