@@ -20,7 +20,6 @@ router.get('/api/measurements', async (req, res) => {
 
 router.post('/api/measurements', async (req, res) => {
   try {
-    console.log(req)
     const data = await createMeasurement(req.body)
     res.json(data)
   } catch (err) {
