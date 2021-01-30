@@ -1,7 +1,7 @@
-const Sequelize = require('sequelize')
-const { sequelize } = require('../connection')
+import Sequelize from 'sequelize'
+import { sequelize } from '../connection'
 
-const Measurement = sequelize.define(
+export const Measurement = sequelize.define(
   'measurement',
   {
     id: {
@@ -20,7 +20,3 @@ const Measurement = sequelize.define(
     underscored: true,
   }
 )
-
-module.exports = {
-  Measurement,
-}

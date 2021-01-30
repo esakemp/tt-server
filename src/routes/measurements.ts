@@ -1,10 +1,12 @@
-const router = require('express').Router()
-const {
+import { Router } from 'express'
+import {
   getMeasurements,
   createMeasurement,
   deleteMeasurement,
   updateMeasurement,
-} = require('../services/measurementService')
+} from '../services/measurementService'
+
+const router = Router()
 
 router.get('/api/measurements', async (req, res) => {
   try {
@@ -18,7 +20,6 @@ router.get('/api/measurements', async (req, res) => {
 
 router.post('/api/measurements', async (req, res) => {
   try {
-    console.log(req)
     const data = await createMeasurement(req.body)
     res.json(data)
   } catch (err) {
@@ -49,4 +50,4 @@ router.delete('/api/measurements/:id', async (req, res) => {
   }
 })
 
-module.exports = router
+export default router

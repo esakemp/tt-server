@@ -1,19 +1,19 @@
-const Sequelize = require('sequelize')
+import { Sequelize } from 'sequelize'
 
 const DB_URL = process.env.DB_URL
-const DB_SCHEMA = process.env.DB_SCHEMA || 'public'
 
-const sequelize = new Sequelize(DB_URL, {
-  schema: DB_SCHEMA,
-  searchPath: DB_SCHEMA,
-  logging: false,
-  pool: {
-    min: 0,
-    max: 10,
-  },
-})
+export const sequelize = new Sequelize(
+  DB_URL,
+  {
+    dialect: 'postgres',
+    pool: {
+      min: 0,
+      max: 5,
+    },
+  }
+)
 
-const initializeDatabaseConnection = async () => {
+export const initializeDatabaseConnection = async () => {
   const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
   const waitSeconds = 60
   for (let i = 1; i <= waitSeconds; i++) {

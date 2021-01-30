@@ -1,9 +1,9 @@
-const express = require('express')
-const cors = require('cors')
-const bodyParser = require('body-parser')
+import express from 'express'
+import cors from 'cors'
+import bodyParser from 'body-parser'
 
-const { initializeDatabaseConnection } = require('./database/connection')
-const routes = require('./routes')
+import { initializeDatabaseConnection } from './database/connection'
+import routes from './routes'
 
 initializeDatabaseConnection()
   .then(() => {
