@@ -1,0 +1,20 @@
+name: Run tests
+
+on: push
+
+jobs:
+  test:
+    name: Run API tests
+    runs-on: ubuntu-16.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: npm ci
+        run: npm ci
+
+      - name: docker-compose up -d db
+        run: docker-compose up -d db
+
+      - name: Run API tests 
+        run: npm test
