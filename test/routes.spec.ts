@@ -1,11 +1,8 @@
 import chai from 'chai'
 import chaiHttp = require('chai-http')
 import 'mocha'
-import Sequelize, { Model } from 'sequelize'
 import server from '../src/app'
 import { Measurement } from '../src/database/models'
-
-const Op = Sequelize.Op
 
 const testMeasurements = [
   { measurement_name: 'Hemoglobiini', unit: 'g/l', lowerbound: 130, upperbound: 146 },
