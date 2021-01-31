@@ -6,7 +6,7 @@ import { initializeDatabaseConnection } from './database/connection'
 import routes from './routes'
 
 initializeDatabaseConnection()
-const lol: any = 'lol'
+
 const app = express()
 
 app.use(cors())
