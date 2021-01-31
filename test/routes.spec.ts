@@ -18,18 +18,13 @@ chai.expect
 
 describe('API Routes', function () {
   beforeEach(done => {
-    Measurement.findAll({ raw: true }).then(measurements => {
-      if (measurements.length > 0) {
-        Measurement.destroy({
-          where: {},
-          truncate: true,
-        }).then(() => {
-          Measurement.bulkCreate(testMeasurements).then(() => done())
-        })
-      }
+    Measurement.destroy({
+      where: {},
+      truncate: true,
+    }).then(() => {
+      Measurement.bulkCreate(testMeasurements).then(() => done())
     })
   })
-
   describe('GET /api/measurements', function () {
     it('should return all measurements', function (done) {
       chai
@@ -44,7 +39,6 @@ describe('API Routes', function () {
         })
     })
   })
-
   describe('POST /api/measurements', function () {
     it('should be able to create measurement', function (done) {
       chai
@@ -90,50 +84,50 @@ describe('API Routes', function () {
             .end(function (error, response) {
               response.should.have.status(200)
               chai
-              .request(server)
-              .get('/api/measurements')
-              .end(function (err, res) {
-                res.should.have.status(200)
-                res.should.be.json
-                res.body.should.be.a('array')
-                res.body.length.should.equal(1)
-                done()
-              })
+                .request(server)
+                .get('/api/measurements')
+                .end(function (err, res) {
+                  res.should.have.status(200)
+                  res.should.be.json
+                  res.body.should.be.a('array')
+                  res.body.length.should.equal(1)
+                  done()
+                })
             })
         })
     })
   })
-  describe('UPDATE /api/measurements', function() {
+  describe('UPDATE /api/measurements', function () {
     it('should be able to update measurement', function (done) {
       chai
-      .request(server)
-      .get('/api/measurements')
-      .end(function (err, res) {
-        res.should.have.status(200)
-        res.should.be.json
-        res.body.should.be.a('array')
-        res.body.length.should.equal(2)
-        const { id } = res.body[0]
-        chai
-          .request(server)
-          .put(`/api/measurements/${id}`)
-          .send({lowerbound: 666, upperbound: 777})
-          .end(function (error, response) {
-            response.should.have.status(200)
-            chai
+        .request(server)
+        .get('/api/measurements')
+        .end(function (err, res) {
+          res.should.have.status(200)
+          res.should.be.json
+          res.body.should.be.a('array')
+          res.body.length.should.equal(2)
+          const { id } = res.body[0]
+          chai
             .request(server)
-            .get('/api/measurements')
-            .end(function (err, res) {
-              res.should.have.status(200)
-              res.should.be.json
-              res.body.should.be.a('array')
-              res.body.length.should.equal(2)
-              res.body[1].lowerbound.should.equal(666)
-              res.body[1].upperbound.should.equal(777)
-              done()
+            .put(`/api/measurements/${id}`)
+            .send({ lowerbound: 666, upperbound: 777 })
+            .end(function (error, response) {
+              response.should.have.status(200)
+              chai
+                .request(server)
+                .get('/api/measurements')
+                .end(function (err, res) {
+                  res.should.have.status(200)
+                  res.should.be.json
+                  res.body.should.be.a('array')
+                  res.body.length.should.equal(2)
+                  res.body[1].lowerbound.should.equal(666)
+                  res.body[1].upperbound.should.equal(777)
+                  done()
+                })
             })
-          })
-      })
+        })
     })
   })
 })
