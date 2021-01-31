@@ -1,13 +1,25 @@
-import Sequelize from 'sequelize'
+import Sequelize, { Model } from 'sequelize'
 import { Measurement } from '../database/models'
+
+type measurementResponse = Model<{
+  id: Number
+  measurement_name: string
+  unit: string
+  lowerbound: Number
+  upperbound: Number
+}>
+
+type measurementPost = { measurement_name: string; unit: string; lowerbound: Number; upperbound: Number }
+
+type measurementUpdate = { measurement_name?: string; unit?: string; lowerbound?: Number; upperbound?: Number }
 
 const Op = Sequelize.Op
 
-export const getMeasurements = () => Measurement.findAll()
+export const getMeasurements = (): Promise<measurementResponse[]> => Measurement.findAll()
 
-export const createMeasurement = data => Measurement.create(data)
+export const createMeasurement = (data: measurementPost) => Measurement.create(data)
 
-export const deleteMeasurement = id =>
+export const deleteMeasurement = (id: string) =>
   Measurement.destroy({
     where: {
       id: {
@@ -16,7 +28,7 @@ export const deleteMeasurement = id =>
     },
   })
 
-export const updateMeasurement = (data, id) =>
+export const updateMeasurement = (data: measurementUpdate, id: string) =>
   Measurement.update(
     { ...data },
     {
@@ -27,5 +39,3 @@ export const updateMeasurement = (data, id) =>
       },
     }
   )
-
-
