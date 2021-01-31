@@ -61,7 +61,6 @@ describe('API Routes', function () {
               res.should.be.json
               res.body.should.be.a('array')
               res.body.length.should.equal(3)
-              console.log(res.body)
               done()
             })
         })
