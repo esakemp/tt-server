@@ -13,8 +13,8 @@ const testMeasurements = [
 ]
 
 chai.use(chaiHttp)
-
-
+chai.should()
+chai.expect
 
 describe('API Routes', function () {
   beforeEach(done => {
