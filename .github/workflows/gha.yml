@@ -3,7 +3,7 @@ name: Run tests
 on: push
 
 jobs:
-  test:
+  lint:
     name: Run lint
     runs-on: ubuntu-16.04
     steps:
@@ -15,7 +15,7 @@ jobs:
 
       - name: Run lint
         run: npm run lint
-
+  test:
     name: Run API tests
     runs-on: ubuntu-16.04
     steps:
